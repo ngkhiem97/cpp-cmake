@@ -18,11 +18,62 @@ if (USE_MYMATH)
 endif ()
 
 # add the CMakeConfig library
-include_directories("${PROJECT_BINARY_DIR}")
 configure_file("${PROJECT_SOURCE_DIR}/CMakeConfig.h.in"
                "${PROJECT_BINARY_DIR}/CMakeConfig.h"
                )
+include_directories("${PROJECT_BINARY_DIR}")
 
 # add the executable
 add_executable(CMake main.cpp)
 target_link_libraries (CMake  ${EXTRA_LIBS})
+
+# add the install targets
+install (TARGETS CMake DESTINATION bin)
+install (FILES "${PROJECT_BINARY_DIR}/CMakeConfig.h"
+         DESTINATION include)
+
+# enable testing
+enable_testing ()
+
+# does the application run
+add_test (CMakeRuns CMake 25)
+
+# does it sqrt of 25
+add_test (CMakeComp25 CMake 25)
+set_tests_properties (CMakeComp25
+  PROPERTIES PASS_REGULAR_EXPRESSION "25 is 5"
+  )
+
+# does it handle negative numbers
+add_test (CMakeNegative CMake -25)
+set_tests_properties (CMakeNegative
+  PROPERTIES PASS_REGULAR_EXPRESSION "-25 is 0"
+  )
+
+# does it handle small numbers
+add_test (CMakeSmall CMake 0.0001)
+set_tests_properties (CMakeSmall
+  PROPERTIES PASS_REGULAR_EXPRESSION "0.0001 is 0.01"
+  )
+
+# does the usage message work?
+add_test (CMakeUsage CMake)
+set_tests_properties (CMakeUsage
+  PROPERTIES PASS_REGULAR_EXPRESSION "Usage:.*number"
+  )
+
+#define a macro to simplify adding tests
+macro (do_test arg result)
+add_test (TutorialComp${arg} Tutorial ${arg})
+set_tests_properties (TutorialComp${arg}
+  PROPERTIES PASS_REGULAR_EXPRESSION ${result}
+  )
+endmacro ()
+
+do_test(4 "4 is 2")
+do_test(9 "9 is 3")
+do_test(5 "5 is 2.236")
+do_test(7 "7 is 2.645")
+do_test(25 "25 is 5")
+do_test(-25 "-25 is (-nan|nan|0)")
+do_test(0.0001 "0.0001 is 0.01")
