@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/khiem/Dropbox/Projects/Personal/cpp-cmake/main.cpp
+iostream
+-
+CMakeConfig.h
+/home/khiem/Dropbox/Projects/Personal/cpp-cmake/CMakeConfig.h
+
+CMakeConfig.h
+
