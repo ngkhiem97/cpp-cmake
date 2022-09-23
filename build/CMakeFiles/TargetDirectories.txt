@@ -1,3 +1,0 @@
-/home/khiem/Dropbox/Projects/Personal/cpp-cmake/build/CMakeFiles/rebuild_cache.dir
-/home/khiem/Dropbox/Projects/Personal/cpp-cmake/build/CMakeFiles/edit_cache.dir
-/home/khiem/Dropbox/Projects/Personal/cpp-cmake/build/CMakeFiles/CMake.dir
