@@ -98,3 +98,10 @@ do_test(7 "7 is 2.645")
 do_test(25 "25 is 5")
 do_test(-25 "-25 is (-nan|nan|0)")
 do_test(0.0001 "0.0001 is 0.01")
+
+# setup installer
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/MIT-License.txt")
+set(CPACK_PACKAGE_VERSION_MAJOR "${VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${VERSION_MINOR}")
+include(CPack)
